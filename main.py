@@ -15,7 +15,7 @@ print("\n")
 
 with sr.Microphone(sample_rate=sample_rate, chunk_size=chunk_size) as source:
     r.adjust_for_ambient_noise(source)
-    print("\n\nSay Something\n\n")
+    print("\nSay Something\n\n")
     audio = r.listen(source)
 
     try:
