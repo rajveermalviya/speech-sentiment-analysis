@@ -1,5 +1,9 @@
 import speech_recognition as sr
 from textblob import TextBlob
+from gtts import gTTS
+from pygame import mixer
+
+mixer.init()
 
 sample_rate = 48000
 chunk_size = 2048
@@ -18,6 +22,10 @@ with sr.Microphone(sample_rate=sample_rate, chunk_size=chunk_size) as source:
         text = r.recognize_google(audio)
         print("you said: \t" + text)
         speech_analysis = TextBlob(text)
+        tts = gTTS(text="I think you said "+str(text),lang='en')
+        tts.save('response.mp3')
+        mixer.music.load('response.mp3')
+        mixer.music.play()
         if speech_analysis.polarity > 0:
             print("\n\nYour Statement was Positve\n\n")
         elif speech_analysis.polarity < 0:
@@ -29,3 +37,4 @@ with sr.Microphone(sample_rate=sample_rate, chunk_size=chunk_size) as source:
     except sr.RequestError as e:
         print(
             "Could not request resultes from Google Speech Recognition service; {0}".format(e))
+wait = input()
