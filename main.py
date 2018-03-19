@@ -1,0 +1,31 @@
+import speech_recognition as sr
+from textblob import TextBlob
+
+sample_rate = 48000
+chunk_size = 2048
+r = sr.Recognizer()
+mic_list = sr.Microphone.list_microphone_names()
+print("Your Mics Are: \n\n")
+print(mic_list)
+print("\n")
+
+with sr.Microphone(sample_rate=sample_rate, chunk_size=chunk_size) as source:
+    r.adjust_for_ambient_noise(source)
+    print("\n\nSay Something\n\n")
+    audio = r.listen(source)
+
+    try:
+        text = r.recognize_google(audio)
+        print("you said: \t" + text)
+        speech_analysis = TextBlob(text)
+        if speech_analysis.polarity > 0:
+            print("\n\nYour Statement was Positve\n\n")
+        elif speech_analysis.polarity < 0:
+            print("\n\nYour Statement was Negative\n\n")
+        else:
+            print("\n\nYour Statement was Kinda Neutral\n\n")
+    except sr.UnknownValueError:
+        print("Google Speech Recognition could not understand audio!")
+    except sr.RequestError as e:
+        print(
+            "Could not request resultes from Google Speech Recognition service; {0}".format(e))
