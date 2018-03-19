@@ -22,16 +22,21 @@ with sr.Microphone(sample_rate=sample_rate, chunk_size=chunk_size) as source:
         text = r.recognize_google(audio)
         print("you said: \t" + text)
         speech_analysis = TextBlob(text)
-        tts = gTTS(text="I think you said "+str(text),lang='en')
+        if speech_analysis.polarity > 0:
+            print("\n\nYour Statement was Positive\n\n")
+            sentiment = str("Your Statement was Positive")
+        elif speech_analysis.polarity < 0:
+            print("\n\nYour Statement was Negative\n\n")
+            sentiment = str("Your Statement was Negative")
+        else:
+            print("\n\nYour Statement was Kinda Neutral\n\n")
+            sentiment = str("Your Statement was Kinda Neutral")
+
+        tts = gTTS(text="I think you said " +str(text)+" and "+sentiment, lang='en')
         tts.save('response.mp3')
         mixer.music.load('response.mp3')
         mixer.music.play()
-        if speech_analysis.polarity > 0:
-            print("\n\nYour Statement was Positve\n\n")
-        elif speech_analysis.polarity < 0:
-            print("\n\nYour Statement was Negative\n\n")
-        else:
-            print("\n\nYour Statement was Kinda Neutral\n\n")
+
     except sr.UnknownValueError:
         print("Google Speech Recognition could not understand audio!")
     except sr.RequestError as e:
