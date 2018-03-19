@@ -5,7 +5,9 @@ It also gives response in audio and saves the response in mp3 file.
 ## Dependencies
 
 * SpeechRecognition(https://pypi.python.org/pypi/SpeechRecognition/)
-* textblob (https://textblob.readthedocs.io/en/dev/)
+* textblob (https://pypi.python.org/pypi/textblob/0.15.1)
+* gTTS (https://pypi.python.org/pypi/gTTS)
+* pygame (https://pypi.python.org/pypi/Pygame)
 * install the nltk_data by 
 
 ```
