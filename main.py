@@ -32,7 +32,7 @@ with sr.Microphone(sample_rate=sample_rate, chunk_size=chunk_size) as source:
             print("\n\nYour Statement was Kinda Neutral\n\n")
             sentiment = str("Your Statement was Kinda Neutral")
 
-        tts = gTTS(text="I think you said " +str(text)+" and "+sentiment, lang='en')
+        tts = gTTS(text="I think you said " +str(text)+". and "+sentiment, lang='en')
         tts.save('response.mp3')
         mixer.music.load('response.mp3')
         mixer.music.play()
