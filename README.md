@@ -1,5 +1,6 @@
 # Speech-Sentiment-Analysis
 Natural Language Processing example, that applies the sentiment analysis on the speech.
+It also gives response in audio and saves the response in mp3 file.
 
 ## Dependencies
 
